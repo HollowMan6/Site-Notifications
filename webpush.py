@@ -20,6 +20,7 @@ def pushNotification(title, options={}):
             webpush(
                 subscription_info=json.loads(subsInfo),
                 data=data,
+                verbose=True,
                 vapid_private_key="tUCZ-8DGMlUhr3ntyN4PQoDbALJSBnv8yZXhi4XX1iI",
                 vapid_claims={
                     "sub": "mailto:hollowman@hollowman.ml",
