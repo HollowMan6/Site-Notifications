@@ -12,14 +12,11 @@ subsInfo = os.environ['SUBSINFO']
 
 def pushNotification(title, options={}):
     if subsInfo:
-        data = {}
-        if options:
-            data = json.loads(options)
-        data["title"] = title
+        options["title"] = title
         try:
             webpush(
                 subscription_info=json.loads(subsInfo),
-                data=data,
+                data=options,
                 verbose=True,
                 vapid_private_key="tUCZ-8DGMlUhr3ntyN4PQoDbALJSBnv8yZXhi4XX1iI",
                 vapid_claims={
