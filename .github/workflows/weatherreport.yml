@@ -1,0 +1,28 @@
+name: 'Daily Weather Report'
+    
+on:
+  workflow_dispatch:  # Allow manual triggers
+  schedule:
+    - cron: '0 4 * * *' # Schedule on CST 12 everyday
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+        - name: 'Checkout codes'
+          uses: actions/checkout@main
+        - name: 'Set up Python'
+          uses: actions/setup-python@main
+          with:
+            python-version: '3.x'
+        - name: 'Install requirements'
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements-run.txt
+        - name: 'Push Weather Report'
+          env:
+            LOCATION: ${{ secrets.LOCATION }}
+            SUBSINFO: ${{ secrets.SUBSINFO }}
+          run: |
+            python weather.py
+

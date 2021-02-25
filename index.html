@@ -1,0 +1,436 @@
+<!--
+  LWebsite Notification subscription Front-end
+
+  Copyright © 2021 Hollow Man(@HollowMan6). All rights reserved.
+
+  This document is free software; you can redistribute it and/or modify it under the terms of the GNU General
+  Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+  any later version.
+-->
+
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport"
+        content="width=device-width,initial-scale=0.6,maximum-scale=1.5,minimum-scale=0.6,user-scalable=yes">
+    <meta name="keywords" content="Hollow Man, 网站, 消息, 订阅" />
+    <meta name="description" content="hollowman.ml网站消息订阅。Website Notification subscription." />
+    <meta name="robots" content="all" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="Author" content="Hollow Man" />
+    <meta name="color-scheme" content="light">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark/dist/css/bootstrap-dark.min.css"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark/dist/css/toggle-bootstrap.min.css"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark/dist/css/toggle-bootstrap-dark.min.css"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark/dist/css/toggle-bootstrap-print.min.css"
+        rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+    <link id="theme-swal" href="" rel="stylesheet">
+    <link href="/css/dayNightSwitchButton.css" rel="stylesheet">
+    <title>Hollow Man's Website Notification Subscription</title>
+    <style>
+        * {
+            cursor: url('/img/cursor/normal.cur'), default;
+            transition: all .3s;
+        }
+
+        body,
+        html {
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        .list-group-item a {
+            margin-right: 20px;
+        }
+
+        .card-body {
+            color: #6C757D;
+        }
+
+        .card-body>.btn {
+            margin-top: .25rem;
+            margin-bottom: .25rem;
+        }
+
+        a,
+        button,
+        input {
+            cursor: url('/img/cursor/link.cur'), pointer !important;
+        }
+
+        a {
+            text-decoration: none;
+            -webkit-transition: all .8s;
+            transition: all .8s;
+            position: relative;
+        }
+
+        a::after {
+            content: "";
+            width: 0;
+            height: 4px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath fill='none' stroke='%23059DDB' stroke-width='2' d='M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3'/%3E%3C/svg%3E") repeat-x 0 100%;
+            background-size: 20px auto;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transition: all .8s;
+        }
+
+        a:hover,
+        a:focus {
+            text-shadow: 0em 0.2em 0.2em rgba(0, 0, 0, 0.25);
+            text-decoration: none !important;
+        }
+
+        a:hover::after,
+        a:focus::after {
+            left: 0%;
+            width: 100%;
+            animation: waveMove 1s infinite linear;
+        }
+
+        .footerLogo {
+            animation: rotate 3s infinite linear;
+        }
+
+        .headpic {
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+            -webkit-transition: opacity 1s, filter 1s, transform 2s;
+            transition: opacity 1s, filter 1s, transform 2s;
+        }
+
+        .headpic:hover {
+            opacity: 1;
+            filter: alpha(opacity=100);
+            transform: rotateX(360deg);
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes waveMove {
+            from {
+                background-position: 0 100%;
+            }
+
+            to {
+                background-position: -20px 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bootstrap">
+    <div class="toggle toggle--daynight" id="SwitchNightMode">
+        <input type="checkbox" id="toggle--daynight1" class="toggle--checkbox" onclick="toggleTheme();">
+        <label class="toggle--btn" for="toggle--daynight1"><span class="toggle--feature"></span></label>
+    </div>
+    <script>
+        function createNotify(title, options) {
+            options.requireInteraction = true;
+            options.vibrate = [200, 100, 200];
+            options.icon = "/favicon.ico";
+
+            if (!window.Notification || !Notification.requestPermission) {
+                return false;
+            } else if (Notification.permission === "granted") {
+                notify(title, options);
+            } else {
+                Notification.requestPermission(function (res) {
+                    if (res === "granted") {
+                        notify(title, options);
+                    }
+                });
+            }
+
+            function notify($title, $options) {
+                try {
+                    var notification = new Notification($title, $options);
+                    notification.onclick = function (event) {
+                        if (event.target.data) {
+                            window.open(event.target.data);
+                        }
+                        window.focus();
+                    };
+                } catch (e) {
+                    if (e.name == 'TypeError') {
+                        navigator.serviceWorker.register('/js/sw.js').then(async function (registration) {
+                            await registration.pushManager.getSubscription()
+                                .then(function (subscription) {
+                                    if (!subscription) {
+                                        registration.pushManager.subscribe({
+                                            userVisibleOnly: true
+                                        }).catch(function (err) {});
+                                    }
+                                });
+                            registration.showNotification($title, $options);
+                        });
+                    }
+                }
+            }
+        }
+
+        function notifyNotif(msg) {
+            createNotify("Page Opened!", {
+                body: "This is page for " + msg + ", click this notification to return!"
+            });
+        }
+
+        function toggleTheme() {
+            var theme = document.getElementsByTagName("body")[0];
+            if (theme.classList.contains("bootstrap")) {
+                sessionStorage.setItem("night", true);
+                theme.classList.replace("bootstrap", "bootstrap-dark");
+                document.getElementById("toggle--daynight1").checked = true;
+                document.getElementById("theme-swal").href =
+                    "https://cdn.jsdelivr.net/npm/@sweetalert2/themes/dark/dark.min.css";
+                document.querySelector("meta[name=color-scheme]").setAttribute('content', 'dark');
+            } else {
+                sessionStorage.setItem("night", false);
+                theme.classList.replace("bootstrap-dark", "bootstrap");
+                document.getElementById("toggle--daynight1").checked = false;
+                document.getElementById("theme-swal").href = "";
+                document.querySelector("meta[name=color-scheme]").setAttribute('content', 'light');
+            }
+        }
+
+        var prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+        if (sessionStorage.getItem("night") === "true") {
+            toggleTheme();
+        } else if (prefersDarkScheme.matches && !sessionStorage.getItem("night")) {
+            toggleTheme();
+        }
+    </script>
+    <blockquote class="blockquote text-center">
+        <p class="mb-0"><img src="/favicon.ico" height="20rem" style="margin-top: -0.2rem" /> Hollow Man's Website
+            Notification Subscription</p>
+        <footer class="blockquote-footer">By <cite title="Source Title">Hollow Man</cite> for pushing notifications
+            conveniently</footer>
+    </blockquote>
+    <hr />
+    <div class="alert alert-success" role="alert">
+        <i><strong><i class="fa fa-info-circle" aria-hidden="true"></i> Introduction: </strong></i><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this page you can <i class="fa fa-bullhorn" aria-hidden="true"></i>
+        subscribe to
+        this website's notification, then use the <strong>Subscription Code</strong> below to directly push the message
+        to the
+        Notifications of <i class="fa fa-android" aria-hidden="true"></i> Android, <i class="fa fa-linux"
+            aria-hidden="true"></i> Linux,
+        <i class="fa fa-windows" aria-hidden="true"></i> Windows, <i class="fa fa-apple" aria-hidden="true"></i> Mac,
+        and etc. (IOS not supported currently)
+        through your browser's Site Notifications. Even if you close this website, you can still receive notifications
+        you sent.<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To send push messages from your own server, <a target="_blank"
+            onclick="notifyNotif('Web Push Libraries');" class="text-success"
+            href="https://github.com/web-push-libs">use one of the libraries available</a>.<br />
+        <i><strong><i class="fa fa-info-circle" aria-hidden="true"></i> VAPID Keys for this website: </strong></i><br />
+        <strong>Public:
+        </strong>BOHSZycLLiXBjp0djrpD6vbzVX4g7D1QcW4cb1UonDcDYu6ewOXJ4qcz-e3J3d2VpjHgm0tHnZRjoGTv7SRJl7M<br />
+        <strong>Private: </strong>tUCZ-8DGMlUhr3ntyN4PQoDbALJSBnv8yZXhi4XX1iI<br />
+        <i><strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Note: </strong></i><br />1. Please
+        don't use <span class="fa-stack fa-lg">
+            <i class="fa fa-internet-explorer fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-danger"></i></span>
+        IE for this page!
+        It's recommended to use <i class="fa fa-chrome" aria-hidden="true"></i> Google Chrome, <i class="fa fa-edge"
+            aria-hidden="true"></i>
+        Microsoft Edge or <i class="fa fa-firefox" aria-hidden="true"></i> Mozilla Firefox.<br />2. For Users in 🇨🇳
+        <strong>Mainland China</strong>: <i class="fa fa-android" aria-hidden="true"></i> 安卓端 <i class="fa fa-chrome"
+            aria-hidden="true"></i>
+        Chrome、<i class="fa fa-edge" aria-hidden="true"></i> Edge、<i class="fa fa-firefox" aria-hidden="true"></i>
+        Firefox浏览器订阅和接收消息时请确保设备访问 <i class="fa fa-google-plus-official" aria-hidden="true"></i>
+        谷歌服务通畅。如点击<strong>Enable Push Message</strong>后，出现错误<strong>DOMException:
+            Registration failed - push service error</strong>，则除了网络问题，
+        请确保浏览器为谷歌Play商店下载的最新版，其它原因一般为你的ROM版本不支持FCM推送服务，建议安装谷歌框架或者刷国际版ROM之后再试。
+        华为/荣耀手机如果安装了谷歌框架后还不支持FCM推送服务可以参考<a target="_blank" onclick="notifyNotif('华为/荣耀安装FCM指南');" class="text-success"
+            href="https://github.com/HollowMan6/Site-Notifications/tree/main/docs/Huawei_Honor_FCM_Fix">这篇文章</a>。
+    </div>
+    <div id="repository" class="card">
+        <h5 class="card-header"><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Operation</h5>
+        <div class="card-body" id="forkRepoAction" align="center">
+            <button type="button" class="btn btn-outline-primary" id="NotifPushBtn"><i class="fa fa-bullhorn"
+                    aria-hidden="true"></i> Enable Push Message</button>
+        </div>
+        <div class="card">
+            <h5 class="card-header"><i class="fa fa-user-secret" aria-hidden="true"></i> Your Subscription Code
+            </h5>
+            <div class="card-body">
+                <div class="alert alert-primary" role="alert" id="subscriptionCode">
+                    If available, please click on the button above to generate one.
+                </div>
+            </div>
+        </div>
+        <script>
+            var applicationServerPublicKey =
+                'BOHSZycLLiXBjp0djrpD6vbzVX4g7D1QcW4cb1UonDcDYu6ewOXJ4qcz-e3J3d2VpjHgm0tHnZRjoGTv7SRJl7M';
+            var pushButton = document.getElementById('NotifPushBtn');
+            var isSubscribed = false;
+            var swRegistration = null;
+
+            function urlB64ToUint8Array(base64String) {
+                const padding = '='.repeat((4 - base64String.length % 4) % 4);
+                const base64 = (base64String + padding)
+                    .replace(/\-/g, '+')
+                    .replace(/_/g, '/');
+
+                const rawData = window.atob(base64);
+                const outputArray = new Uint8Array(rawData.length);
+
+                for (let i = 0; i < rawData.length; ++i) {
+                    outputArray[i] = rawData.charCodeAt(i);
+                }
+                return outputArray;
+            }
+
+            function updatePushBtn() {
+                if (Notification.permission === 'denied') {
+                    pushButton.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i> Push Messaging Blocked';
+                    pushButton.disabled = true;
+                    updateSubscriptionOnServer(null);
+                    return;
+                }
+
+                if (isSubscribed) {
+                    pushButton.innerHTML = '<i class="fa fa-power-off" aria-hidden="true"></i> Disable Push Message';
+                } else {
+                    pushButton.innerHTML = '<i class="fa fa-bullhorn" aria-hidden="true"></i> Enable Push Message';
+                }
+
+                pushButton.disabled = false;
+            }
+
+            function subscribeUser() {
+                const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+                swRegistration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: applicationServerKey
+                    })
+                    .then(function (subscription) {
+                        updateSubscriptionOnServer(subscription);
+                        isSubscribed = true;
+                        updatePushBtn();
+                    })
+                    .catch(function (err) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Subscribe User Failed',
+                            text: err,
+                        }).then((result) => {
+                            updatePushBtn();
+                        });
+                    });
+            }
+
+
+            function updateSubscriptionOnServer(subscription) {
+                if (subscription) {
+
+                    subscriptionCode.innerHTML =
+                        "Here\'s your Subscription Code, REMEMBER not to tell others to avoid Spam: (You can always regenerate a new one by clicking the button above twice to disable and then re-enable push message.)<br/><code>" +
+                        JSON.stringify(subscription) + "</code></div>"
+                } else {
+                    subscriptionCode.innerHTML = "If available, please click on the button above to generate one.";
+                }
+            }
+
+            function unsubscribeUser() {
+                swRegistration.pushManager.getSubscription()
+                    .then(function (subscription) {
+                        if (subscription) {
+                            return subscription.unsubscribe();
+                        }
+                    })
+                    .catch(function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Cancel Subscription Failed',
+                            text: error,
+                        });
+                    })
+                    .then(function () {
+                        updateSubscriptionOnServer(null);
+                        isSubscribed = false;
+                        updatePushBtn();
+                    });
+            }
+
+            function initializePushButton() {
+                pushButton.addEventListener('click', function () {
+                    pushButton.disabled = true;
+                    if (isSubscribed) {
+                        unsubscribeUser();
+                    } else {
+                        subscribeUser();
+                    }
+                });
+
+                swRegistration.pushManager.getSubscription()
+                    .then(function (subscription) {
+                        isSubscribed = !(subscription === null);
+                        updateSubscriptionOnServer(subscription);
+                        updatePushBtn();
+                    });
+            }
+
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                navigator.serviceWorker.register('/js/sw.js')
+                    .then(function (swReg) {
+                        swRegistration = swReg;
+                        initializePushButton();
+                    })
+                    .catch(function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Service Worker Error',
+                            text: error,
+                        });
+                    });
+            } else {
+                pushButton.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i> Push message not supported';
+                pushButton.disabled = true;
+            }
+        </script>
+        <footer>
+            <hr />
+            <p align="center">
+                <img class="headpic" src="/img/logo.gif" width="30%" onclick="window.open('/','_blank')">
+            </p>
+            <h5 align="center">Copyright &copy; 2018-2021 <img width="20px" class="footerLogo" style="margin-top: -5px"
+                    src="/favicon.ico"> Hollow
+                Man (<a href="https://github.com/HollowMan6" target="_blank"
+                    onclick="notifyNotif('Author\'s GitHub');">@HollowMan6</a>). All rights reserved.</h5>
+            <p align="center">
+                <img src="https://img.shields.io/badge/license-GPL-green"
+                    onclick="window.open('https://opensource.org/licenses/GPL-3.0/','_blank')">
+                <img src="https://img.shields.io/badge/-%E2%9D%A4%20Open%20Source-Green?style=flat-square&logo=GitHub&logoColor=white&link=https://hollowman.ml/fund.html"
+                    onclick="window.open('/fund.html','_blank')">
+                <img src="https://img.shields.io/github/repo-size/HollowMan6/Site-Notifications.svg"
+                    onclick="window.open('https://github.com/HollowMan6/Site-Notifications','_blank')">
+            </p>
+            <h6 align="center">
+                <a style="font-size: 15px;" href="https://icp.gov.moe" onclick="notifyNotif('备案');"
+                    target="_blank">萌ICP备</a>
+                <img width="20px" style="margin-top: -5px;" src="https://icp.gov.moe/images/ico64.png">
+                <a style="font-size: 15px;" href="https://icp.gov.moe/?keyword=20218666" onclick="notifyNotif('备案信息');"
+                    target="_blank">20218666号</a>
+            </h6>
+        </footer>
+</body>
+
+</html>
