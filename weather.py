@@ -35,7 +35,7 @@ if hjson_day['HeWeather6'][0]['status'] == "ok":
     options['body'] += "湿度："+day0['hum']+"％\n"
     options['body'] += "风向："+day0['wind_dir']+"\n"
     options['body'] += "风力："+day0['wind_sc']+"\n"
-    options['body'] += "UV指数："+day0['uv_index']+"\n"
+    options['body'] += "UV指数："+day0['uv_index']
     options['data'] = "https://www.qweather.com/weather/" + \
         hjson_day['HeWeather6'][0]['basic']['cid'] + ".html"
     pushNotification(title, options)
