@@ -17,7 +17,6 @@ def pushNotification(title, options={}):
             webpush(
                 subscription_info=json.loads(subsInfo),
                 data=json.dumps(options),
-                verbose=True,
                 vapid_private_key="tUCZ-8DGMlUhr3ntyN4PQoDbALJSBnv8yZXhi4XX1iI",
                 vapid_claims={
                     "sub": "mailto:hollowman@hollowman.ml",
@@ -37,7 +36,7 @@ def pushNotification(title, options={}):
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 2:
         pushNotification(sys.argv[1], sys.argv[2])
     else:
         pushNotification(sys.argv[1])

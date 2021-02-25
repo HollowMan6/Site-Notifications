@@ -38,6 +38,7 @@
 ## 网站使用的 VAPID Keys
 
 公钥: `BOHSZycLLiXBjp0djrpD6vbzVX4g7D1QcW4cb1UonDcDYu6ewOXJ4qcz-e3J3d2VpjHgm0tHnZRjoGTv7SRJl7M`
+
 私钥: `tUCZ-8DGMlUhr3ntyN4PQoDbALJSBnv8yZXhi4XX1iI`
 
 ## 注意
