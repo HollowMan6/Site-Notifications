@@ -3,9 +3,9 @@
 # by 'hollowman6' from Lanzhou University(兰州大学)
 
 import requests
-import webpush
 import json
 import os
+from urllib.request import quote
 
 # Get the weather report
 r_day = requests.get('https://free-api.heweather.net/s6/weather/forecast?location=' +
@@ -23,8 +23,8 @@ if hjson_day['HeWeather6'][0]['status'] == "ok":
     title = day0['cond_txt_d'] + "，" + hjson_day['HeWeather6'][0]['basic']['location'] + \
         "，" + hjson_day['HeWeather6'][0]['basic']['admin_area']
     options = {"requireInteraction": True, "vibrate": [200, 100, 200]}
-    options['icon'] = "https://github.com/zhuguohui/WeatherTextViewDemo/raw/master/weather/src/main/assets/weather/" + \
-        day0['cond_txt_d'] + ".png"
+    options['icon'] = quote("https://github.com/zhuguohui/WeatherTextViewDemo/raw/master/weather/src/main/assets/weather/" + \
+        day0['cond_txt_d'] + ".png", safe=";/?:@&=+$,", encoding="utf-8")
     options['body'] = "气温："+day0['tmp_max']+" -- "+day0['tmp_min']+"\n"
     if hjson_air['HeWeather6'][0]['status'] == "ok":
         options['body'] += "空气质量："+hjson_air['HeWeather6'][0]['air_now_city']['aqi'] + \
@@ -37,6 +37,6 @@ if hjson_day['HeWeather6'][0]['status'] == "ok":
     options['body'] += "UV指数："+day0['uv_index']+"\n"
     options['data'] = "https://www.qweather.com/weather/" + \
         hjson_day['HeWeather6'][0]['basic']['cid'] + ".html"
-    webpush.pushNotification(title, options)
+    print(options)
 else:
     raise Exception(hjson_day['HeWeather6'][0]['status'])
