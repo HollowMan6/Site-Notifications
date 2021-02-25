@@ -2,7 +2,7 @@
 
 [![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Site-Notifications)](https://github.com/HollowMan6/Site-Notifications/graphs/commit-activity)
 ![Python package](https://github.com/HollowMan6/Site-Notifications/workflows/Python%20package/badge.svg)
-![GitHub Actions LZU Auto COVID Health Report](https://github.com/HollowMan6/Site-Notifications/workflows/GitHub%20Actions%20LZU%20Auto%20COVID%20Health%20Report/badge.svg)
+[![Daily Weather Report](https://github.com/HollowMan6/Site-Notifications/actions/workflows/weatherreport.yml/badge.svg)](https://github.com/HollowMan6/Site-Notifications/actions/workflows/weatherreport.yml)
 
 [![Followers](https://img.shields.io/github/followers/HollowMan6?style=social)](https://github.com/HollowMan6?tab=followers)
 [![watchers](https://img.shields.io/github/watchers/HollowMan6/Site-Notifications?style=social)](https://github.com/HollowMan6/Site-Notifications/watchers)
