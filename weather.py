@@ -5,6 +5,7 @@
 import requests
 import json
 import os
+from webpush import pushNotification
 from urllib.request import quote
 
 # Get the weather report
@@ -37,6 +38,6 @@ if hjson_day['HeWeather6'][0]['status'] == "ok":
     options['body'] += "UV指数："+day0['uv_index']+"\n"
     options['data'] = "https://www.qweather.com/weather/" + \
         hjson_day['HeWeather6'][0]['basic']['cid'] + ".html"
-    print(options)
+    pushNotification(title, options)
 else:
     raise Exception(hjson_day['HeWeather6'][0]['status'])
