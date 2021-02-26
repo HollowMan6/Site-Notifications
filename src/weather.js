@@ -4,7 +4,7 @@ const pushWeather = function (subsinfo, hjson_day, data = "") {
     const day0 = hjson_day.HeWeather6[0].daily_forecast[0];
     const title = day0.cond_txt_d + "，" + hjson_day.HeWeather6[0].basic.location + "，" + hjson_day.HeWeather6[0].basic.admin_area;
     const options = {
-        "requireInteraction": True,
+        "requireInteraction": true,
         "vibrate": [200, 100, 200]
     };
     options.icon = encodeURI("https://github.com/zhuguohui/WeatherTextViewDemo/raw/master/weather/src/main/assets/weather/" +

@@ -1,32 +1,32 @@
 {
-    "name": "@hollowman6/site-notifications",
-    "version": "1.0.0",
-    "description": "Browser Website Notification and Daily Weather Report for Github Actions. (浏览器推送网站通知/每日天气预报推送)",
-    "main": "src/index.js",
-    "scripts": {
-        "start": "node src/index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-      "type": "git",
-      "url": "ssh://git@github.com/HollowMan6/Site-Notifications.git"
-    },
-    "keywords": [
-      "github",
-      "actions",
-      "webpush",
-      "notifications"
-    ],
-    "author": "Hollow Man",
-    "license": "GPL-3.0",
-    "bugs": {
-      "url": "https://github.com/HollowMan6/Site-Notifications/issues"
-    },
-    "homepage": "https://github.com/HollowMan6/Site-Notifications#readme",
-    "publishConfig": {
-      "registry": "https://npm.pkg.github.com/"
-    },
-    "devDependencies": {
-      "web-push": "^3.4.4"
-    }
+  "name": "@hollowman6/site-notifications",
+  "version": "1.0.0",
+  "description": "Browser Website Notification and Daily Weather Report for Github Actions. (浏览器推送网站通知/每日天气预报推送)",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/HollowMan6/Site-Notifications.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "webpush",
+    "notifications"
+  ],
+  "author": "Hollow Man",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/HollowMan6/Site-Notifications/issues"
+  },
+  "homepage": "https://github.com/HollowMan6/Site-Notifications#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "devDependencies": {
+    "web-push": "^3.4.4"
   }
+}
