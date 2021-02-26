@@ -2,7 +2,8 @@
 
 [![last-commit](https://img.shields.io/github/last-commit/HollowMan6/Site-Notifications)](https://github.com/HollowMan6/Site-Notifications/graphs/commit-activity)
 ![Python package](https://github.com/HollowMan6/Site-Notifications/workflows/Python%20package/badge.svg)
-[![Daily Weather Report](https://github.com/HollowMan6/Site-Notifications/actions/workflows/weatherreport.yml/badge.svg)](https://github.com/HollowMan6/Site-Notifications/actions/workflows/weatherreport.yml)
+[![Node.js Package](https://github.com/HollowMan6/Site-Notifications/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/HollowMan6/Site-Notifications/actions/workflows/npm-publish.yml)
+[![Push Browser Notification and Daily Weather Report](https://github.com/HollowMan6/Site-Notifications/actions/workflows/notification.yml/badge.svg)](https://github.com/HollowMan6/Site-Notifications/actions/workflows/notification.yml)
 
 [![Followers](https://img.shields.io/github/followers/HollowMan6?style=social)](https://github.com/HollowMan6?tab=followers)
 [![watchers](https://img.shields.io/github/watchers/HollowMan6/Site-Notifications?style=social)](https://github.com/HollowMan6/Site-Notifications/watchers)
