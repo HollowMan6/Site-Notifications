@@ -1,4 +1,6 @@
-const pushWeather = function (subsinfo, day0, data = "") {
+'use strict';
+
+const pushWeather = function (subsinfo, hjson_day, data = "") {
     const day0 = hjson_day.HeWeather6[0].daily_forecast[0];
     const title = day0.cond_txt_d + "，" + hjson_day.HeWeather6[0].basic.location + "，" + hjson_day.HeWeather6[0].basic.admin_area;
     const options = {
@@ -47,11 +49,11 @@ const getAndPushWeather = function (subsinfo, location) {
                         });
 
                         resp.on('end', () => {
-                            pushWeather(subsinfo, day0, data);
+                            pushWeather(subsinfo, hjson_day, data);
                         });
                     }).on("error", (err) => {
                         console.error("Error: " + err.message)
-                        pushWeather(subsinfo, day0);
+                        pushWeather(subsinfo, hjson_day);
                     });
                 } else {
                     throw new Error(hjson_day.HeWeather6[0].status);

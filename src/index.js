@@ -1,4 +1,6 @@
-const webpush = require('./web-push.js');
+'use strict';
+
+const webpush = require('./webpush.js');
 const weather = require('./weather.js');
 
 const subsinfo = process.env.SUBSINFO || process.env.INPUT_SUBSINFO;
