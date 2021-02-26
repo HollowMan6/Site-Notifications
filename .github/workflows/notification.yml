@@ -9,14 +9,10 @@ jobs:
   bot:
     runs-on: ubuntu-latest
     steps:
-        - name: 'Checkout codes'
-          uses: actions/checkout@main
-        - name: 'Push Browser Notification and Daily Weather Report'
-          env:
+        - name: Push Browser Notification and Daily Weather Report
+          uses: HollowMan6/Site-Notifications@main
+          with:
             SUBSINFO: ${{ secrets.SUBSINFO }}
             LOCATION: ${{ secrets.LOCATION }}
             TITLE: ${{ secrets.TITLE }}
             OPTIONS: ${{ secrets.OPTIONS }}
-          run: |
-            npm install && node src/index.js
-
