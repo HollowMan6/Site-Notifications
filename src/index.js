@@ -1,5 +1,5 @@
-const webpush = require('./src/web-push.js');
-const weather = require('./src/weather.js');
+const webpush = require('./web-push.js');
+const weather = require('./weather.js');
 
 const subsinfo = process.env.SUBSINFO || process.env.INPUT_SUBSINFO;
 const location = process.env.LOCATION || process.env.INPUT_LOCATION;

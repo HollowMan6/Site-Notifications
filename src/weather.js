@@ -21,7 +21,7 @@ const pushWeather = function (subsinfo, day0, data = "") {
     options.body += "风力：" + day0.wind_sc + "\n";
     options.body += "UV指数：" + day0.uv_index;
     options.data = "https://www.qweather.com/weather/" + hjson_day.HeWeather6[0].basic.cid + ".html";
-    const webpush = require('./src/webpush.js');
+    const webpush = require('./webpush.js');
     webpush.pushNotification(subsinfo, title, options);
     console.log("Weather sending succeeded!")
 }
@@ -64,3 +64,8 @@ const getAndPushWeather = function (subsinfo, location) {
         console.log("LOCATION not set.")
     }
 }
+
+module.exports = {
+    pushWeather: pushWeather,
+    getAndPushWeather: getAndPushWeather
+};
