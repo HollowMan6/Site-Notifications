@@ -18,7 +18,7 @@ inputs:
 
 runs:
   using: 'node12'
-  image: 'src/index.js'
+  main: 'src/index.js'
 
 branding:
   color: red
