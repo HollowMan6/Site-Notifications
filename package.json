@@ -1,9 +1,11 @@
 {
   "name": "@hollowman6/site-notifications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browser Website Notification and Daily Weather Report for Github Actions. (浏览器推送网站通知/每日天气预报推送)",
   "main": "src/index.js",
   "scripts": {
+    "build": "webpack ./src/index.js -o ./dist",
+    "release": "node dist/main.js",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,6 +29,9 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "devDependencies": {
-    "web-push": "^3.4.4"
+    "node-polyfill-webpack-plugin": "^1.0.3",
+    "web-push": "^3.4.4",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0"
   }
 }
