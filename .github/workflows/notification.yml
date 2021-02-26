@@ -1,4 +1,4 @@
-name: 'Daily Weather Report'
+name: 'Push Browser Notification and Daily Weather Report'
     
 on:
   workflow_dispatch:  # Allow manual triggers

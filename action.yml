@@ -1,43 +1,25 @@
 
-name: 'LZU Auto COVID Health Report'
-description: 'LZU Auto COVID Health Report using Github Action.(兰大疫情期间自动定时健康打卡)'
+name: 'Site Notifications'
+description: 'Browser Website Notification and Daily Weather Report. (浏览器推送网站通知/每日天气预报推送)'
 
 inputs:
-  CARDID:
-    description: 'Your Student Card ID(兰大校园卡号)'
-    required: true
-  PASSWORD:
-    description: 'Your Student Email Login Password(兰大邮箱卡号)'
-    required: true
-  DELAYS:
-    description: 'Delay time for running(设置打卡时间延迟)'
-    required: false
-  SERVERCHANSCKEY:
-    description: 'Server酱 SCKEY'
-    required: false
-  OPENID:
-    description: 'Server酱测试号版 微信公众号用户OpenID'
-    required: false
-  PPTOKEN:
-    description: 'PushPlus Token'
-    required: false
-  PPTOPIC:
-    description: 'PushPlus Topic(群组编码)'
-    required: false
-  TGBOTTOKEN:
-    description: 'Telegraph Bot Token'
-    required: false
-  TGCHATID:
-    description: 'Telegram User ID'
-    required: false
   SUBSINFO:
-    description: 'Browser Notification Subscription Code (浏览器通知订阅代码)'
+    description: 'Your Website Subscription Code 你的网站订阅码'
+    required: true
+  LOCATION:
+    description: 'Weather Forecast Location (This input marks push Weather Forecast Notification) 天气预报地点(该输入标志工作流进行天气预报报道)'
+    required: false
+  TITLE:
+    description: 'Notification Title (This input marks push Customized Notification) 通知标题(该输入标志工作流进行自定义通知推送)'
+    required: false
+  OPTIONS:
+    description: 'Notification Options (This input only works for Customized Notification) 通知选项(该输入仅对自定义通知推送起效)'
     required: false
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node12'
+  image: 'src/index.js'
 
 branding:
-  color: blue
-  icon: clock
+  color: red
+  icon: message-circle
