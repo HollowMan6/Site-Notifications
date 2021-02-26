@@ -8,6 +8,7 @@ module.exports = {
     fallback: {
       net: false,
       tls: false,
+      fs: false,
     }
   },
   plugins: [
