@@ -19,15 +19,15 @@
 
 (English version is down below)
 
-[Python库依赖](https://github.com/HollowMan6/Site-Notifications/network/dependencies)
+[Python/NodeJS库依赖](https://github.com/HollowMan6/Site-Notifications/network/dependencies)
 
-[推送脚本](webpush.py)
+[推送脚本(python)](python/webpush.py) [推送脚本(NodeJS)](src/webpush.js)
 
 [订阅网页端](index.html)
 
 ## 简介
 
-[推送脚本](webpush.py)参数见：https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#parameters
+[推送脚本(python)](python/webpush.py)参数见：https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#parameters
 
 其中函数标题Title为字符串类型，Options为字典类型，使用时需要预先设定环境变量`SUBSINFO`为订阅码。
 
@@ -55,21 +55,49 @@
 
 [每日天气预报推送工作流](.github/workflows/weatherreport.yml)
 
-这里使用GitHub Actions，每日中午12点自动运行[脚本](weather.py)，推送当日天气。
+这里使用GitHub Actions，每日中午12点自动运行[脚本](python/weather.py)，推送当日天气。
 
 如果你也想使用，请在Fork本仓库之后，创建两个Actions Secrets，一个Name为`LOCATION`，value为天气预报地点；另一个Name为`SUBSINFO`，value为你的订阅码。
 
+### Github Actions Workflow 自行配置工作流
+
+你可以自行创建一个仓库并自行配置工作流进行使用，该工作流可以自行定义消息，也可以进行天气预报推送。[示例工作流文件](.github/workflows/notification.yml)
+
+### 输入
+
+#### 必须
+
+* SUBSINFO: 你的网站订阅码
+
+#### 可选
+
+* LOCATION: 天气预报地点(该输入标志工作流进行天气预报报道)
+* TITLE: 通知标题(该输入标志工作流进行自定义通知推送)
+* OPTIONS: 通知选项(该输入仅对自定义通知推送起效)
+
+### 示例
+
+```yaml
+- name: Push Browser Notification and Daily Weather Report
+  uses: HollowMan6/Site-Notifications@main
+  with:
+    SUBSINFO: ${{ secrets.SUBSINFO }}
+    LOCATION: ${{ secrets.LOCATION }}
+    TITLE: ${{ secrets.TITLE }}
+    OPTIONS: ${{ secrets.OPTIONS }}
+```
+
 # Browser Website Notification
 
-[Python library dependency](https://github.com/HollowMan6/Site-Notifications/network/dependencies)
+[Python / NodeJS library dependency](https://github.com/HollowMan6/Site-Notifications/network/dependencies)
 
-[Web push Script](webpush.py)
+[Web push Script(python)](python/webpush.py) [Web push Script(NodeJS)](src/webpush.js)
 
 [Subscription Page](index.html)
 
 ## Introduction
 
-See https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#parameters for [Web push Script](webpush.py) Parameters.
+See https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#parameters for [Web push Script(python)](python/webpush.py) Parameters.
 
 The function's title being the string type, options being dictionary type. You have to pre-set environment variable `SUBSINFO` as the Subscription Code.
 
@@ -95,6 +123,34 @@ If your phone is Huawei or Honor phone and does not support FCM push service aft
 
 [Daily Weather Report Workflow](.github/workflows/weatherreport.yml)
 
-Here use GitHub Actions, executing [script](weather.py) 12 a.m. CST everyday to push Weather Report Notification.
+Here use GitHub Actions, executing [script](python/weather.py) 12 a.m. CST everyday to push Weather Report Notification.
 
 If you also want to use it, please create two Actions Secrets after forking. One name is `LOCATION`, and value is the weather forecasting location; the other name is `SUBSINFO`, and value is your subscription code.
+
+### Github Actions Workflow Self-Configure Workflow
+
+You can create your own repository and configure your own workflow to use, this workflow can send customized notifications and also weather report. [Example Workflow YAML File](.github/workflows/notification.yml)
+
+### Input
+
+#### Required
+
+* SUBSINFO: Your Website Subscription Code
+
+#### Optional
+
+* LOCATION: Weather Forecast Location (This input marks push Weather Forecast Notification)
+* TITLE: Notification Title (This input marks push Customized Notification)
+* OPTIONS: Notification Options (This input only works for Customized Notification)
+
+### Example
+
+```yaml
+- name: Push Browser Notification and Daily Weather Report
+  uses: HollowMan6/Site-Notifications@main
+  with:
+    SUBSINFO: ${{ secrets.SUBSINFO }}
+    LOCATION: ${{ secrets.LOCATION }}
+    TITLE: ${{ secrets.TITLE }}
+    OPTIONS: ${{ secrets.OPTIONS }}
+```

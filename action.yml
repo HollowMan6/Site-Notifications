@@ -1,0 +1,43 @@
+
+name: 'LZU Auto COVID Health Report'
+description: 'LZU Auto COVID Health Report using Github Action.(兰大疫情期间自动定时健康打卡)'
+
+inputs:
+  CARDID:
+    description: 'Your Student Card ID(兰大校园卡号)'
+    required: true
+  PASSWORD:
+    description: 'Your Student Email Login Password(兰大邮箱卡号)'
+    required: true
+  DELAYS:
+    description: 'Delay time for running(设置打卡时间延迟)'
+    required: false
+  SERVERCHANSCKEY:
+    description: 'Server酱 SCKEY'
+    required: false
+  OPENID:
+    description: 'Server酱测试号版 微信公众号用户OpenID'
+    required: false
+  PPTOKEN:
+    description: 'PushPlus Token'
+    required: false
+  PPTOPIC:
+    description: 'PushPlus Topic(群组编码)'
+    required: false
+  TGBOTTOKEN:
+    description: 'Telegraph Bot Token'
+    required: false
+  TGCHATID:
+    description: 'Telegram User ID'
+    required: false
+  SUBSINFO:
+    description: 'Browser Notification Subscription Code (浏览器通知订阅代码)'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  color: blue
+  icon: clock

@@ -2,8 +2,8 @@ name: 'Daily Weather Report'
     
 on:
   workflow_dispatch:  # Allow manual triggers
-  schedule:
-    - cron: '0 4 * * *' # Schedule on CST 12 everyday
+  # schedule:
+  #   - cron: '0 4 * * *' # Schedule on CST 12 everyday
 
 jobs:
   bot:
@@ -24,5 +24,5 @@ jobs:
             LOCATION: ${{ secrets.LOCATION }}
             SUBSINFO: ${{ secrets.SUBSINFO }}
           run: |
-            python weather.py
+            cd python && python weather.py
 

@@ -1,0 +1,22 @@
+name: 'Daily Weather Report'
+    
+on:
+  workflow_dispatch:  # Allow manual triggers
+  schedule:
+    - cron: '0 4 * * *' # Schedule on CST 12 everyday
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+        - name: 'Checkout codes'
+          uses: actions/checkout@main
+        - name: 'Push Browser Notification and Daily Weather Report'
+          env:
+            SUBSINFO: ${{ secrets.SUBSINFO }}
+            LOCATION: ${{ secrets.LOCATION }}
+            TITLE: ${{ secrets.TITLE }}
+            OPTIONS: ${{ secrets.OPTIONS }}
+          run: |
+            npm install && node src/index.js
+
