@@ -13,7 +13,7 @@ const pushWeather = function (subsinfo, hjson_day, data = "") {
     if (data) {
         const hjson_air = JSON.parse(data);
         if (hjson_air.HeWeather6[0].status == "ok") {
-            options.body += "空气质量：" + hjson_air.HeWeather6[0].air_now_city.aqi + hjson_air.HeWeather6[0].air_now_city.qlty + "\n";
+            options.body += "空气质量：" + hjson_air.HeWeather6[0].air_now_city.aqi + " " + hjson_air.HeWeather6[0].air_now_city.qlty + "\n";
         }
     }
     options.body += "日间天气：" + day0.cond_txt_d + "\n";

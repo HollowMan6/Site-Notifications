@@ -59,7 +59,7 @@
 
 如果你也想使用，请在Fork本仓库之后，创建两个Actions Secrets，一个Name为`LOCATION`，value为天气预报地点；另一个Name为`SUBSINFO`，value为你的订阅码。
 
-### Github Actions Workflow 自行配置工作流
+## Github Actions Workflow 自行配置工作流
 
 你可以自行创建一个仓库并自行配置工作流进行使用，该工作流可以自行定义消息，也可以进行天气预报推送。[示例工作流文件](.github/workflows/notification.yml)
 
@@ -127,7 +127,7 @@ Here use GitHub Actions, executing [script](python/weather.py) 12 a.m. CST every
 
 If you also want to use it, please create two Actions Secrets after forking. One name is `LOCATION`, and value is the weather forecasting location; the other name is `SUBSINFO`, and value is your subscription code.
 
-### Github Actions Workflow Self-Configure Workflow
+## Github Actions Workflow Self-Configure Workflow
 
 You can create your own repository and configure your own workflow to use, this workflow can send customized notifications and also weather report. [Example Workflow YAML File](.github/workflows/notification.yml)
 

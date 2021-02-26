@@ -29,7 +29,7 @@ if hjson_day['HeWeather6'][0]['status'] == "ok":
                          hjson_day['HeWeather6'][0]['basic']['parent_city'] + '&key=e8410d236ac043bbb9939bd536e2e646&lang=zh-hans')
     hjson_air = json.loads(r_air.text)
     if hjson_air['HeWeather6'][0]['status'] == "ok":
-        options['body'] += "空气质量："+hjson_air['HeWeather6'][0]['air_now_city']['aqi'] + \
+        options['body'] += "空气质量："+hjson_air['HeWeather6'][0]['air_now_city']['aqi'] + " " + \
             hjson_air['HeWeather6'][0]['air_now_city']['qlty']+"\n"
     options['body'] += "日间天气："+day0['cond_txt_d']+"\n"
     options['body'] += "夜间天气："+day0['cond_txt_n']+"\n"
