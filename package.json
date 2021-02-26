@@ -27,6 +27,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "devDependencies": {
-    "web-push": "^3.4.4"
+    "web-push": "^3.4.4",
+    "@actions/core": "^1.2.6"
   }
 }
