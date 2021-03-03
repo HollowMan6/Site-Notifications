@@ -25,7 +25,7 @@ const pushWeather = function (subsinfo, hjson_day, data = "") {
     options.data = "https://www.qweather.com/weather/" + hjson_day.HeWeather6[0].basic.cid + ".html";
     const webpush = require('./webpush.js');
     webpush.pushNotification(subsinfo, title, options);
-    console.log("Weather sending succeeded!")
+    console.log("Weather sending succeeded!");
 }
 
 const getAndPushWeather = function (subsinfo, location) {
