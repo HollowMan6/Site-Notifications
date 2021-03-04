@@ -24,6 +24,7 @@ const pushNotification = function (subsinfo, title, options = {}) {
               core.setFailed(err);
             } catch (error) {
               console.log(err, error);
+              process.exit(1);
             }
           }
         );
