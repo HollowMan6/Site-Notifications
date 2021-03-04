@@ -10,7 +10,11 @@ const pushNotification = function (subsinfo, title, options = {}) {
   if (subsinfo) {
     if (title) {
       options.title = title
-      webpush.sendNotification(JSON.parse(subsinfo), JSON.stringify(options));
+      webpush.sendNotification(JSON.parse(subsinfo), JSON.stringify(options)).catch(
+        function (err) {
+          throw new Error(err);
+        }
+      );
     } else {
       console.log("TITLE not set.")
     }
