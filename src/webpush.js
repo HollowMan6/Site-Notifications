@@ -12,7 +12,12 @@ const pushNotification = function (subsinfo, title, options = {}) {
       options.title = title
       webpush.sendNotification(JSON.parse(subsinfo), JSON.stringify(options)).catch(
         function (err) {
-          throw new Error(err);
+          try {
+            var core = require('@actions/core');
+            core.setFailed(err);
+          } catch (error) {
+            console.log(err, error);
+          }
         }
       );
     } else {

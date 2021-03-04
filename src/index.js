@@ -1,6 +1,6 @@
 'use strict';
 
-const core = require('@actions/core')
+const core = require('@actions/core');
 const webpush = require('./webpush.js');
 const weather = require('./weather.js');
 
