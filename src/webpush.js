@@ -10,16 +10,23 @@ const pushNotification = function (subsinfo, title, options = {}) {
   if (subsinfo) {
     if (title) {
       options.title = title
-      webpush.sendNotification(JSON.parse(subsinfo), JSON.stringify(options)).catch(
-        function (err) {
-          try {
-            var core = require('@actions/core');
-            core.setFailed(err);
-          } catch (error) {
-            console.log(err, error);
+      webpush.sendNotification(JSON.parse(subsinfo), JSON.stringify(options))
+        .then(
+          function (data) {
+            console.log("Successfully sent!");
+            console.log(data);
           }
-        }
-      );
+        )
+        .catch(
+          function (err) {
+            try {
+              var core = require('@actions/core');
+              core.setFailed(err);
+            } catch (error) {
+              console.log(err, error);
+            }
+          }
+        );
     } else {
       console.log("TITLE not set.")
     }
