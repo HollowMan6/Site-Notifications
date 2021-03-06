@@ -1,6 +1,6 @@
 {
   "name": "@hollowman6/site-notifications",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Browser Website Notification and Daily Weather Report for Github Actions. (浏览器推送网站通知/每日天气预报推送)",
   "main": "src/index.js",
   "dependencies": {
