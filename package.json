@@ -16,6 +16,8 @@
   "scripts": {
     "build": "webpack ./src/index.js -o ./dist",
     "lint": "eslint .",
+    "postinstall": "husky install",
+    "pre-commit": "lint-staged && eslint . --fix && webpack ./src/index.js -o ./dist",
     "release": "node dist/main.js",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -36,11 +38,6 @@
     "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && eslint . --fix && webpack ./src/index.js -o ./dist"
     }
   },
   "lint-staged": {
