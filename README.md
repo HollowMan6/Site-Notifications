@@ -20,7 +20,7 @@
 
 (English version is down below)
 
-[Python/NodeJS库依赖](https://github.com/HollowMan6/Site-Notifications/network/dependencies)
+[Python/NodeJS 库依赖](https://github.com/HollowMan6/Site-Notifications/network/dependencies)
 
 [推送脚本(python)](python/webpush.py) [推送脚本(NodeJS)](src/webpush.js)
 
@@ -30,9 +30,9 @@
 
 [推送脚本(python)](python/webpush.py)参数见：https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification#parameters
 
-其中函数标题Title为字符串类型，Options为字典类型，使用时需要预先设定环境变量`SUBSINFO`为订阅码。
+其中函数标题 Title 为字符串类型，Options 为字典类型，使用时需要预先设定环境变量`SUBSINFO`为订阅码。
 
-通过[这里的订阅网页端](https://hollowman.ml/Site-Notifications/)你可以订阅[我的网站](https://hollowman.ml/)的浏览器推送消息，获取到订阅码。随后你就可以使用订阅码将消息通过浏览器通知的形式推送到安卓/Linux/Windows/Mac等通知栏处(IOS暂不支持)。即使你关闭了网页，你仍然可以收到通知。
+通过[这里的订阅网页端](https://hollowman.ml/Site-Notifications/)你可以订阅[我的网站](https://hollowman.ml/)的浏览器推送消息，获取到订阅码。随后你就可以使用订阅码将消息通过浏览器通知的形式推送到安卓/Linux/Windows/Mac 等通知栏处(IOS 暂不支持)。即使你关闭了网页，你仍然可以收到通知。
 
 如果你需要从你自己的服务器发送消息，你可以使用这里的[推送工具库](https://github.com/web-push-libs)
 
@@ -44,21 +44,25 @@
 
 ## 注意
 
-建议选用最新版谷歌Chrome、微软Edge、Mozilla Firefox。
+建议选用最新版谷歌 Chrome、微软 Edge、Mozilla Firefox。
 
 请不要告诉别人你的订阅码，以防被骚扰。另外你随时可以通过按钮关闭开启浏览器推送来重新生成订阅码。
 
-由于安卓端Chrome、Edge、Firefox浏览器订阅和接收打卡消息时使用FCM(Firebase Cloud Messaging)，所以请确保设备访问谷歌服务通畅，并且通常需要安装好相关谷歌服务才能使用。如点击`Enable Push Message`后，出现错误`DOMException: Registration failed - push service error`，则除了网络问题，请确保浏览器为谷歌Play商店下载的最新版，其它原因一般为你的ROM版本不支持FCM推送服务，建议安装谷歌框架或者刷国际版ROM之后再试。
+由于安卓端 Chrome、Edge、Firefox 浏览器订阅和接收打卡消息时使用 FCM(Firebase Cloud Messaging)，所以请确保设备访问谷歌服务通畅，并且通常需要安装好相关谷歌服务才能使用。如点击`Enable Push Message`后，出现错误`DOMException: Registration failed - push service error`，则除了网络问题，请确保浏览器为谷歌 Play 商店下载的最新版，其它原因一般为你的 ROM 版本不支持 FCM 推送服务，建议安装谷歌框架或者刷国际版 ROM 之后再试。
 
-华为/荣耀手机如果安装了谷歌框架后还不支持FCM推送服务可以参考[这篇文章](docs/Huawei_Honor_FCM_Fix)
+华为/荣耀手机如果安装了谷歌框架后还不支持 FCM 推送服务可以参考[这篇文章](docs/Huawei_Honor_FCM_Fix)
 
 ## 应用: 每日天气预报推送
 
 [每日天气预报推送工作流](.github/workflows/weatherreport.yml)
 
-这里使用GitHub Actions，每日中午12点自动运行[脚本](python/weather.py)，推送当日天气。
+这里使用 GitHub Actions，每日中午 12 点自动运行[脚本](python/weather.py)，推送当日天气。
 
-如果你也想使用，请在Fork本仓库之后，创建两个Actions Secrets，一个Name为`LOCATION`，value为天气预报地点；另一个Name为`SUBSINFO`，value为你的订阅码。
+如果你也想使用，请在 Fork 本仓库之后，创建两个 Actions Secrets，一个 Name 为`LOCATION`，value 为天气预报地点；另一个 Name 为`SUBSINFO`，value 为你的订阅码。
+
+GitLab: https://gitlab.com/HollowMan6/Site-Notifications
+
+也可以使用 GitLab Pipeline [CI](.gitlab-ci.yml)，同理创建两个 CI/CD Variables。
 
 ## Github Actions Workflow 自行配置工作流
 
@@ -68,13 +72,13 @@
 
 #### 必须
 
-* SUBSINFO: 你的网站订阅码
+- SUBSINFO: 你的网站订阅码
 
 #### 可选
 
-* LOCATION: 天气预报地点(该输入标志工作流进行天气预报报道)
-* TITLE: 通知标题(该输入标志工作流进行自定义通知推送)
-* OPTIONS: 通知选项(该输入仅对自定义通知推送起效)
+- LOCATION: 天气预报地点(该输入标志工作流进行天气预报报道)
+- TITLE: 通知标题(该输入标志工作流进行自定义通知推送)
+- OPTIONS: 通知选项(该输入仅对自定义通知推送起效)
 
 ### 示例
 
@@ -128,6 +132,10 @@ Here use GitHub Actions, executing [script](python/weather.py) 12 a.m. CST every
 
 If you also want to use it, please create two Actions Secrets after forking. One name is `LOCATION`, and value is the weather forecasting location; the other name is `SUBSINFO`, and value is your subscription code.
 
+GitLab: https://gitlab.com/HollowMan6/Site-Notifications
+
+You can also use GitLab Pipeline [CI](.gitlab-ci.yml), creating two CI/CD Variables。
+
 ## Github Actions Workflow Self-Configure Workflow
 
 You can create your own repository and configure your own workflow to use, this workflow can send customized notifications and also weather report. [Example Workflow YAML File](.github/workflows/notification.yml)
@@ -136,13 +144,13 @@ You can create your own repository and configure your own workflow to use, this 
 
 #### Required
 
-* SUBSINFO: Your Website Subscription Code
+- SUBSINFO: Your Website Subscription Code
 
 #### Optional
 
-* LOCATION: Weather Forecast Location (This input marks push Weather Forecast Notification)
-* TITLE: Notification Title (This input marks push Customized Notification)
-* OPTIONS: Notification Options (This input only works for Customized Notification)
+- LOCATION: Weather Forecast Location (This input marks push Weather Forecast Notification)
+- TITLE: Notification Title (This input marks push Customized Notification)
+- OPTIONS: Notification Options (This input only works for Customized Notification)
 
 ### Example
 

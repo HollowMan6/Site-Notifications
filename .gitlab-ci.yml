@@ -1,0 +1,13 @@
+image: python:latest
+
+variables:
+  LOCATION: ""
+  SUBSINFO: ""
+
+run:
+  stage: run
+  script:
+    - python -V  # Print out python version for debugging
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+    - cd python && python weather.py
