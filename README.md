@@ -50,7 +50,7 @@
 
 由于安卓端 Chrome、Edge、Firefox 浏览器订阅和接收打卡消息时使用 FCM(Firebase Cloud Messaging)，所以请确保设备访问谷歌服务通畅，并且通常需要安装好相关谷歌服务才能使用。如点击`Enable Push Message`后，出现错误`DOMException: Registration failed - push service error`，则除了网络问题，请确保浏览器为谷歌 Play 商店下载的最新版，其它原因一般为你的 ROM 版本不支持 FCM 推送服务，建议安装谷歌框架或者刷国际版 ROM 之后再试。
 
-华为/荣耀手机如果安装了谷歌框架后还不支持 FCM 推送服务可以参考[这篇文章](docs/Huawei_Honor_FCM_Fix)
+华为/荣耀手机如果安装了谷歌框架后还不支持 FCM 推送服务可以参考[这篇文章](https://github.com/HollowMan6/LZU-Auto-COVID-Health-Report/tree/main/docs/Huawei_Honor_FCM_Fix)
 
 ## 应用: 每日天气预报推送
 
