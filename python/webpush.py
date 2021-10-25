@@ -10,8 +10,10 @@ import json
 subsInfo = os.environ['SUBSINFO']
 
 
-def pushNotification(title, options={}):
+def pushNotification(title, options=None):
     if subsInfo:
+        if not options:
+            options = {}
         options["title"] = title
         try:
             webpush(

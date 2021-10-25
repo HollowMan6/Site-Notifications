@@ -9,9 +9,9 @@ on:
       - v*
 
 jobs:
-
   publish-gpr:
     runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
