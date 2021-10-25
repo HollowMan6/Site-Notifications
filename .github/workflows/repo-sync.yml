@@ -11,6 +11,7 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Sync to Gitee
+      if: ${{ secrets.SSH_PRIVATE_KEY != '' }}
       uses: wearerequired/git-mirror-action@master
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
